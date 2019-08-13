@@ -144,7 +144,8 @@ describe "Grocer" do
         coupon = find_coupon("AVOCADO")
         consol_cart = consolidate_cart([avocado, avocado, avocado, avocado, avocado])
         two_coupon_result = apply_coupons(consol_cart, [coupon, coupon])
-
+        p "----------------------"
+        p two_coupon_result
         expect(two_coupon_result["AVOCADO"][:count]).to eq(1)
         expect(two_coupon_result["AVOCADO W/COUPON"][:price]).to eq(2.50)
         expect(two_coupon_result["AVOCADO"][:price]).to eq(3.00)
@@ -219,7 +220,8 @@ describe "Grocer" do
         consolidated = consolidate_cart(cart)
         coupons_applied = apply_coupons(consolidated, coupons)
         clearance_applied = apply_clearance(coupons_applied)
-
+        p "----------------------"
+        p clearance_applied
         expect(self).to receive(:consolidate_cart).with(cart).and_return(consolidated)
         expect(self).to receive(:apply_coupons).with(consolidated, coupons).and_return(coupons_applied)
         expect(self).to receive(:apply_clearance).with(coupons_applied).and_return(clearance_applied)
