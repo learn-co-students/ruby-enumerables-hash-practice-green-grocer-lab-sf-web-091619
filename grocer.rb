@@ -45,10 +45,31 @@ end
 
 def apply_clearance(cart)
   # code here
-  
-  binding.pry
+  discount = 0.2
+  cart.each do |name, props|
+    if props[:clearance]
+      props[:price] -= props[:price] * discount
+    end
+  end
+  cart
 end
 
 def checkout(cart, coupons)
   # code here
+  
+  final_cart = consolidate_cart(cart)
+  discounts = apply_coupons(final_cart, coupons)
+  clearance = apply_clearance(discounts)
+  
+  total = clearance.reduce(0) { |acc, (key, value)| 
+    acc += value[:price] * value[:count]
+  }
+  
+  if total > 100 
+    total *= 0.9
+    return total
+  else
+    return total
+  end
+  #binding.pry
 end
