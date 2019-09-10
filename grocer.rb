@@ -34,9 +34,6 @@ def apply_coupons(cart, coupons)
           count: coupon[:num]
         }
         cart[item][:count] -= coupon[:num]
-        
-        #binding.pry
-      
       elsif cart[item][:count] >= coupon[:num] && cart["#{item} W/COUPON"]
         cart["#{item} W/COUPON"][:count] += coupon[:num]
         cart[item][:count] -= coupon[:num]
@@ -49,7 +46,7 @@ end
 def apply_clearance(cart)
   # code here
   
-  
+  binding.pry
 end
 
 def checkout(cart, coupons)
